@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.geekbrains.weatherwithmvvm">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".App"
@@ -14,6 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherWithMVVM">
+        <provider
+            android:name=".framework.EducationContentProvider"
+            android:authorities="geekbrains.provider"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
         <activity android:name=".framework.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,31 +31,35 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".experiments.UsualService"
-            android:enabled="true"/>
-        <service android:name=".experiments.ServiceWithThread"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:enabled="true"/>
-        <service android:name=".experiments.MyForegroundService"
-            android:foregroundServiceType="location"
-            android:enabled="true"/>
-        <service android:name=".framework.services.DetailsService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:enabled="true"/>
+        <service
+            android:name=".experiments.UsualService"
+            android:enabled="true" />
+        <service
+            android:name=".experiments.ServiceWithThread"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".experiments.MyForegroundService"
+            android:enabled="true"
+            android:foregroundServiceType="location" />
+        <service
+            android:name=".framework.services.DetailsService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <receiver android:name=".experiments.BootCompleteReceiver"
+        <receiver
+            android:name=".experiments.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.REBOOT" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

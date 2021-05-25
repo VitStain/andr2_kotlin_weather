@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.geekbrains.weatherwithmvvm.R
 import com.geekbrains.weatherwithmvvm.databinding.MainActivityBinding
+import com.geekbrains.weatherwithmvvm.framework.ui.contacts.ContactsFragment
 import com.geekbrains.weatherwithmvvm.framework.ui.history.HistoryFragment
 import com.geekbrains.weatherwithmvvm.framework.ui.main.MainFragment
 import com.geekbrains.weatherwithmvvm.framework.ui.threads_fragment.ThreadsFragment
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_history -> {
                 openFragment(HistoryFragment.newInstance())
+                true
+            }
+            R.id.menu_content_provider -> {
+                openFragment(ContactsFragment.newInstance())
                 true
             }
             else -> super.onOptionsItemSelected(item)
