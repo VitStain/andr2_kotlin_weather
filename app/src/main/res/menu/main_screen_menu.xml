@@ -19,4 +19,11 @@
         android:title="@string/contacts"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/menu_google_maps"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/map"
+        app:showAsAction="ifRoom" />
+
+
 </menu>
