@@ -18,7 +18,7 @@ interface HistoryDao {
     fun update(entity: HistoryEntity)
 
     @Delete
-    fun delete(entity: HistoryEntity)
+    fun delete(entity: HistoryEntity): Int
 
     @Query("DELETE FROM HistoryEntity WHERE city = :cityName")
     fun deleteByCityName(cityName: String)

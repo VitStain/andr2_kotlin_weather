@@ -65,7 +65,14 @@
             android:name=".framework.services.DetailsService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
+        <service android:name=".framework.services.FCMService"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <receiver
             android:name=".experiments.BootCompleteReceiver"
             android:enabled="true"
