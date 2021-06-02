@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.geekbrains.weatherwithmvvm">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".App"
@@ -14,6 +22,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherWithMVVM">
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <provider
+            android:name=".framework.EducationContentProvider"
+            android:authorities="geekbrains.provider"
+            android:enabled="true"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
+
         <activity android:name=".framework.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,31 +50,42 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".experiments.UsualService"
-            android:enabled="true"/>
-        <service android:name=".experiments.ServiceWithThread"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:enabled="true"/>
-        <service android:name=".experiments.MyForegroundService"
-            android:foregroundServiceType="location"
-            android:enabled="true"/>
-        <service android:name=".framework.services.DetailsService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:enabled="true"/>
-
-        <receiver android:name=".experiments.BootCompleteReceiver"
+        <service
+            android:name=".experiments.UsualService"
+            android:enabled="true" />
+        <service
+            android:name=".experiments.ServiceWithThread"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".experiments.MyForegroundService"
+            android:enabled="true"
+            android:foregroundServiceType="location" />
+        <service
+            android:name=".framework.services.DetailsService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".framework.services.FCMService"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <receiver
+            android:name=".experiments.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.REBOOT" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
