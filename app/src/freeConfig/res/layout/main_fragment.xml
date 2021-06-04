@@ -2,15 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainFragmentRootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/paidTitle"
+        android:id="@+id/freeConfigTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/paid_title"
-        android:textSize="@dimen/feels_like_text_size"
+        android:text="@string/freeconfig_title"
+        android:textSize="@dimen/city_name_text_size"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center"/>
@@ -22,8 +23,18 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/paidTitle"/>
+        app:layout_constraintTop_toBottomOf="@id/freeConfigTitle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mainFragmentFABLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_map"
+        app:rippleColor="@color/seashell"
+        app:layout_constraintBottom_toTopOf="@+id/mainFragmentFAB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="@dimen/fab_icon_size" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mainFragmentFAB"
@@ -31,37 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_russia"
-        app:backgroundTint="@android:color/transparent"
-        app:tint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="@dimen/fab_icon_size"
-        android:contentDescription="@string/switcher_of_cities" />
+        app:tint="@null"
+        tools:ignore="ContentDescription" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mainFragmentFABLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/white"
-        android:src="@android:drawable/ic_dialog_map"
-        app:layout_constraintBottom_toTopOf="@+id/mainFragmentFAB"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/weather_by_coordinates"
-        app:maxImageSize="@dimen/fab_location_icon_size" />
+    <include
+        android:id="@+id/includedLoadingLayout"
+        layout="@layout/loading_layout" />
 
-    <FrameLayout
-        android:id="@+id/mainFragmentLoadingLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/blue"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
